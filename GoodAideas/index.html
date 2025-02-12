@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoodAideas - AI Edition</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <div id="onboarding-overlay" style="display: none;">
+        <div id="onboarding-modal">
+            <h2>Welcome to GoodAideas AI!</h2>
+            <p>Discover a world of AI-powered ideas to boost your productivity, health, and finances. Explore daily picks, save your favorites, and even suggest your own ideas!</p>
+            <button id="dismiss-onboarding-button">Get Started!</button>
+        </div>
+    </div>
+
+
+    <div id="notification-area">
+        </div>
+
+
+    <header class="header">
+        <div class="user-profile-container">
+            <div class="user-profile-icon"></div> <span id="user-profile-name"></span>
+            <button id="login-button">Login</button>
+            <button id="logout-button" style="display:none;">Logout</button>
+        </div>
+        <h1>GoodAideas - AI Edition</h1>
+    </header>
+
+
+    <section id="idea-of-the-day-container">
+        </section>
+
+
+    <section id="sort-filter-container">
+        <label for="sort-select">Sort by:</label>
+        <select id="sort-select">
+            <option value="default">Default</option>
+            <option value="top-rated">Top Rated</option>
+            <option value="most-recent">Most Recent</option>
+        </select>
+    </section>
+
+
+    <div class="filter-bar">
+        <button class="filter-button" data-category="favorites">Favorites</button>
+        <button class="filter-button active" data-category="all">Daily Picks</button>
+        <button class="filter-button" data-category="Productivity">Productivity</button>
+        <button class="filter-button" data-category="Health &amp; Wellness">Health &amp; Wellness</button>
+        <button class="filter-button" data-category="Finance">Finance</button>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search GoodAideas...">
+        <button id="search-button">Search</button>
+    </div>
+
+    <div id="idea-feed">
+        </div>
+
+    <div id="load-more-container">
+        <button id="load-more-button">Load More GoodAideas</button>
+    </div>
+
+
+    <section id="suggest-idea-container">
+        <h2>Suggest a GoodAidea</h2>
+        <form id="suggest-idea-form">
+            <div class="form-group">
+                <label for="suggestion-title">Idea Title</label>
+                <input type="text" id="suggestion-title" class="form-control" placeholder="Enter title" required>
+            </div>
+            <div class="form-group">
+                <label for="suggestion-category">Category</label>
+                <select id="suggestion-category" class="form-control" required>
+                    <option value="">Select Category</option>
+                    <option value="Productivity">Productivity</option>
+                    <option value="Health &amp; Wellness">Health &amp; Wellness</option>
+                    <option value="Finance">Finance</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="suggestion-text">Idea Description</label>
+                <textarea id="suggestion-text" class="form-control" rows="4" placeholder="Describe your AI GoodAidea" required></textarea>
+            </div>
+            <button type="submit" id="submit-suggestion-button">Submit Suggestion</button>
+            <div id="suggestion-message-area">Thank you! Your suggestion has been submitted.</div>
+        </form>
+    </section>
+
+    <section id="user-suggestions-container">
+        <h2>User Suggestions (Admin View)</h2>
+        </section>
+
+
+</body>
+</html>
