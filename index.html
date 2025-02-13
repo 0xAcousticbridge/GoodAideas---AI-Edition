@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoodAideas - AI Edition</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -13,90 +12,171 @@
     <div id="onboarding-overlay" style="display: none;">
         <div id="onboarding-modal">
             <h2>Welcome to GoodAideas AI!</h2>
-            <p>Discover a world of AI-powered ideas to boost your productivity, health, and finances. Explore daily picks, save your favorites, and even suggest your own ideas!</p>
+            <p>Discover a world of AI-powered ideas...</p>
             <button id="dismiss-onboarding-button">Get Started!</button>
         </div>
     </div>
 
-
-    <div id="notification-area">
-        </div>
-
+    <div id="notification-area"></div>
 
     <header class="header">
         <div class="user-profile-container">
-            <div class="user-profile-icon"></div> <span id="user-profile-name"></span>
+            <div class="user-profile-icon"></div>
+            <span id="user-profile-name"></span>
+            <span id="user-points-header">Loading Points...</span>
             <button id="login-button">Login</button>
             <button id="logout-button" style="display:none;">Logout</button>
-        </div>
+            <button id="register-button">Register</button>  <button id="profile-button" style="display:none;">Profile</button> <button id="admin-dashboard-button" style="display:none;">Admin Dashboard</button> </div>
         <h1>GoodAideas - AI Edition</h1>
     </header>
 
+    <main class="main-content">
 
-    <section id="idea-of-the-day-container">
+        <section id="idea-of-the-day-container">
+            <h2>Idea of the Day</h2>
+            <div id="featured-idea">
+                </div>
         </section>
 
+        <section id="sort-filter-container">
+            <label for="sort-select">Sort by:</label>
+            <select id="sort-select">
+                <option value="default">Default</option>
+                <option value="top-rated">Top Rated</option>
+                <option value="most-recent">Most Recent</option>
+                <option value="popular">Popular</option> </select>
+            <label for="category-select">Category:</label> <select id="category-select">
+                <option value="all">All Categories</option>
+                <option value="Productivity">Productivity</option>
+                <option value="Health &amp; Wellness">Health &amp; Wellness</option>
+                <option value="Finance">Finance</option>
+                </select>
+            <label for="tag-input">Filter by Tag:</label> <input type="text" id="tag-input" placeholder="Enter tag"> </section>
 
-    <section id="sort-filter-container">
-        <label for="sort-select">Sort by:</label>
-        <select id="sort-select">
-            <option value="default">Default</option>
-            <option value="top-rated">Top Rated</option>
-            <option value="most-recent">Most Recent</option>
-        </select>
-    </section>
-
-
-    <div class="filter-bar">
-        <button class="filter-button" data-category="favorites">Favorites</button>
-        <button class="filter-button active" data-category="all">Daily Picks</button>
-        <button class="filter-button" data-category="Productivity">Productivity</button>
-        <button class="filter-button" data-category="Health &amp; Wellness">Health &amp; Wellness</button>
-        <button class="filter-button" data-category="Finance">Finance</button>
-    </div>
-
-    <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search GoodAideas...">
-        <button id="search-button">Search</button>
-    </div>
-
-    <div id="idea-feed">
+        <div class="filter-bar">
+            <button class="filter-button" data-category="favorites">Favorites</button>
+            <button class="filter-button active" data-category="all">Daily Picks</button>
+            <button class="filter-button" data-category="Productivity">Productivity</button>
+            <button class="filter-button" data-category="Health &amp; Wellness">Health &amp; Wellness</button>
+            <button class="filter-button" data-category="Finance">Finance</button>
         </div>
 
-    <div id="load-more-container">
-        <button id="load-more-button">Load More GoodAideas</button>
-    </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search GoodAideas...">
+            <button id="search-button">Search</button>
+        </div>
 
+        <div id="idea-feed">
+            </div>
 
-    <section id="suggest-idea-container">
-        <h2>Suggest a GoodAidea</h2>
-        <form id="suggest-idea-form">
-            <div class="form-group">
-                <label for="suggestion-title">Idea Title</label>
-                <input type="text" id="suggestion-title" class="form-control" placeholder="Enter title" required>
-            </div>
-            <div class="form-group">
-                <label for="suggestion-category">Category</label>
-                <select id="suggestion-category" class="form-control" required>
-                    <option value="">Select Category</option>
-                    <option value="Productivity">Productivity</option>
-                    <option value="Health &amp; Wellness">Health &amp; Wellness</option>
-                    <option value="Finance">Finance</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="suggestion-text">Idea Description</label>
-                <textarea id="suggestion-text" class="form-control" rows="4" placeholder="Describe your AI GoodAidea" required></textarea>
-            </div>
-            <button type="submit" id="submit-suggestion-button">Submit Suggestion</button>
-            <div id="suggestion-message-area">Thank you! Your suggestion has been submitted.</div>
-        </form>
-    </section>
+        <div id="load-more-container">
+            <button id="load-more-button">Load More GoodAideas</button>
+        </div>
 
-    <section id="user-suggestions-container">
-        <h2>User Suggestions (Admin View)</h2>
+        <section id="suggest-idea-container" style="display: none;"> <h2>Suggest a GoodAidea</h2>
+            <form id="suggest-idea-form">
+                <div class="form-group">
+                    <label for="suggestion-title">Idea Title</label>
+                    <input type="text" id="suggestion-title" class="form-control" placeholder="Enter title" required>
+                </div>
+                <div class="form-group">
+                    <label for="suggestion-category">Category</label>
+                    <select id="suggestion-category" class="form-control" required>
+                        <option value="">Select Category</option>
+                        <option value="Productivity">Productivity</option>
+                        <option value="Health &amp; Wellness">Health &amp; Wellness</option>
+                        <option value="Finance">Finance</option>
+                        </select>
+                </div>
+                <div class="form-group">
+                    <label for="suggestion-tags">Tags (comma-separated)</label> <input type="text" id="suggestion-tags" class="form-control" placeholder="Enter tags (e.g., AI, productivity, health)">
+                </div>
+                <div class="form-group">
+                    <label for="suggestion-text">Idea Description</label>
+                    <textarea id="suggestion-text" class="form-control" rows="4" placeholder="Describe your AI GoodAidea" required></textarea>
+                </div>
+                <button type="submit" id="submit-suggestion-button">Submit Suggestion</button>
+                <div id="suggestion-message-area" style="display: none;">Thank you! Your suggestion has been submitted.</div>
+            </form>
         </section>
 
+        <section id="user-suggestions-container" style="display: none;">
+            <h2>User Suggestions (Admin View)</h2>
+            <div id="suggestions-list">
+                </div>
+        </section>
+
+        <section id="user-profile-section" style="display: none;">
+            <h2>User Profile</h2>
+            <div id="profile-details">
+                <div class="profile-avatar-container">
+                    <img id="profile-avatar-image" src="" alt="Profile Avatar">
+                </div>
+                <div class="profile-info">
+                    <p>Username: <span id="profile-username"></span></p>
+                    <p>Email: <span id="profile-email"></span></p>
+                    <p>Points: <span id="profile-points"></span></p>
+                    <p>Profile Description:</p>
+                    <textarea id="profile-description-textarea" rows="3"></textarea>
+                    <button id="update-profile-button">Update Profile</button>
+                    <div id="profile-message-area" style="display: none;">Profile updated!</div>
+                </div>
+            </div>
+        </section>
+
+        <div id="auth-overlay" style="display: none;">
+            <div id="auth-modal">
+                <div id="auth-form-container">
+                    <form id="login-form" style="display: block;">
+                        <h2>Login</h2>
+                        <div class="form-group">
+                            <label for="login-username">Username</label>
+                            <input type="text" id="login-username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" class="form-control" required>
+                        </div>
+                        <button type="submit" id="login-submit-button">Login</button>
+                        <p class="auth-switch-link">Don't have an account? <a href="#" id="show-register-link">Register</a></p>
+                        <div id="login-error-area" class="error-message" style="display: none;"></div>
+                    </form>
+
+                    <form id="register-form" style="display: none;">
+                        <h2>Register</h2>
+                        <div class="form-group">
+                            <label for="register-username">Username</label>
+                            <input type="text" id="register-username" class="form-control" required>
+                        </div>
+                         <div class="form-group">
+                            <label for="register-email">Email (optional)</label>
+                            <input type="email" id="register-email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" class="form-control" required>
+                        </div>
+                        <button type="submit" id="register-submit-button">Register</button>
+                        <p class="auth-switch-link">Already have an account? <a href="#" id="show-login-link">Login</a></p>
+                        <div id="register-error-area" class="error-message" style="display: none;"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 GoodAideas - AI Edition. All rights reserved.</p>
+        <nav class="footer-nav">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Contact Us</a>
+        </nav>
+    </footer>
+
+    <script src="script.js" defer></script>
 
 </body>
 </html>
