@@ -5,7 +5,7 @@ from datetime import datetime
 
 DATABASE = 'goodaideas.db'
 app = Flask(__name__)
-app.secret_key = 'your_super_secret_key_change_me'  # Replace with a real secret key!
+app.secret_key = 'your_super_secret_key_change_me'  # IMPORTANT: Replace with a real secret key!
 
 # Database Configuration
 def get_db_connection():
@@ -21,7 +21,7 @@ def get_user_points(user_id):
     conn = get_db_connection()
     points = 0
     try:
-        user_data = conn.execute("SELECT points FROM users WHERE id =?", (user_id,)).fetchone()
+        user_data = conn.execute("SELECT points FROM users WHERE id = ?", (user_id,)).fetchone()
         if user_data:
             points = user_data['points']
     except sqlite3.Error as e:
@@ -45,12 +45,12 @@ def register_user():
 
     conn = get_db_connection()
     try:
-        existing_user = conn.execute("SELECT * FROM users WHERE username =?", (username,)).fetchone()
+        existing_user = conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
         if existing_user:
             return jsonify({'message': 'Username already taken'}), 409
 
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
-        conn.execute("INSERT INTO users (username, password, email, registration_date, points) VALUES (?,?,?,?,?)",
+        conn.execute("INSERT INTO users (username, password, email, registration_date, points) VALUES (?, ?, ?, ?, ?)",
                      (username, hashed_password, email, datetime.now(), 0)) # Initialize points to 0
         conn.commit()
         return jsonify({'message': 'User registered successfully'}), 201
@@ -72,7 +72,7 @@ def login_user():
 
     conn = get_db_connection()
     try:
-        user = conn.execute("SELECT * FROM users WHERE username =?", (username,)).fetchone()
+        user = conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
         if user and check_password_hash(user['password'], password):
             session['user_id'] = user['id']
             session['username'] = user['username']
@@ -106,7 +106,7 @@ def check_session():
 @app.route('/api/ideas', methods=['GET'])
 def list_ideas():
     conn = get_db_connection()
-    ideas =
+    ideas = []
     try:
         # Example query - adjust as needed for filters, sorting, pagination
         db_ideas = conn.execute("SELECT * FROM ideas").fetchall()
@@ -141,13 +141,13 @@ def submit_idea():
 
     conn = get_db_connection()
     try:
-        conn.execute("INSERT INTO ideas (user_id, title, category, description, tags, submission_date) VALUES (?,?,?,?,?,?)",
+        conn.execute("INSERT INTO ideas (user_id, title, category, description, tags, submission_date) VALUES (?, ?, ?, ?, ?, ?)",
                      (user_id, title, category, description, ','.join(tags) if tags else None, datetime.now())) # Store tags as comma-separated string
         conn.commit()
 
         # Award points for suggesting an idea
         points_to_award = 5  # Example points
-        conn.execute("UPDATE users SET points = points +? WHERE id =?", (points_to_award, user_id))
+        conn.execute("UPDATE users SET points = points + ? WHERE id = ?", (points_to_award, user_id))
         conn.commit()
 
 
@@ -168,17 +168,17 @@ def favorite_idea(idea_id):
     conn = get_db_connection()
     try:
         # Check if already favorited (prevent duplicates)
-        existing_favorite = conn.execute("SELECT * FROM favorites WHERE user_id =? AND idea_id =?", (user_id, idea_id)).fetchone()
+        existing_favorite = conn.execute("SELECT * FROM favorites WHERE user_id = ? AND idea_id = ?", (user_id, idea_id)).fetchone()
         if existing_favorite:
             return jsonify({'message': 'Idea already favorited'}), 409 # Conflict - already exists
 
-        conn.execute("INSERT INTO favorites (user_id, idea_id, favorited_date) VALUES (?,?,?)",
+        conn.execute("INSERT INTO favorites (user_id, idea_id, favorited_date) VALUES (?, ?, ?)",
                      (user_id, idea_id, datetime.now()))
         conn.commit()
 
         # Award points for favoriting an idea
         points_to_award = 1  # Example points
-        conn.execute("UPDATE users SET points = points +? WHERE id =?", (points_to_award, user_id))
+        conn.execute("UPDATE users SET points = points + ? WHERE id = ?", (points_to_award, user_id))
         conn.commit()
 
 
@@ -198,12 +198,12 @@ def unfavorite_idea(idea_id):
 
     conn = get_db_connection()
     try:
-        conn.execute("DELETE FROM favorites WHERE user_id =? AND idea_id =?", (user_id, idea_id))
+        conn.execute("DELETE FROM favorites WHERE user_id = ? AND idea_id = ?", (user_id, idea_id))
         conn.commit()
 
         # Deduct points for unfavoriting (optional - you can decide if you want to deduct points)
         points_deduct = 1 # Example points to deduct
-        conn.execute("UPDATE users SET points = points -? WHERE id =? AND points >=?", (points_deduct, user_id, points_deduct)) # Ensure points don't go below zero
+        conn.execute("UPDATE users SET points = points - ? WHERE id = ? AND points >= ?", (points_deduct, user_id, points_deduct)) # Ensure points don't go below zero
         conn.commit()
 
 
@@ -231,18 +231,19 @@ def rate_idea(idea_id):
     conn = get_db_connection()
     try:
         # Check if user has already rated this idea - if so, update, otherwise insert new rating
-        existing_rating = conn.execute("SELECT * FROM ratings WHERE user_id =? AND idea_id =?", (user_id, idea_id)).fetchone()
+        existing_rating = conn.execute("SELECT * FROM ratings WHERE user_id = ? AND idea_id = ?", (user_id, idea_id)).fetchone()
         if existing_rating:
-            conn.execute("UPDATE ratings SET rating =?, rating_date =? WHERE user_id =? AND idea_id =?",
+            conn.execute("UPDATE ratings SET rating = ?, rating_date = ? WHERE user_id = ? AND idea_id = ?",
                          (rating_value, datetime.now(), user_id, idea_id))
-             return jsonify({'message': 'Rating updated successfully'}), 200 # Indicate update
+            conn.commit()
+            return jsonify({'message': 'Rating updated successfully'}), 200 # Indicate update
 
         else:
-            conn.execute("INSERT INTO ratings (user_id, idea_id, rating, rating_date) VALUES (?,?,?,?)",
+            conn.execute("INSERT INTO ratings (user_id, idea_id, rating, rating_date) VALUES (?, ?, ?, ?)",
                          (user_id, idea_id, rating_value, datetime.now()))
             # Award points for rating an idea (first time rating)
             points_to_award = 2  # Example points
-            conn.execute("UPDATE users SET points = points +? WHERE id =?", (points_to_award, user_id))
+            conn.execute("UPDATE users SET points = points + ? WHERE id = ?", (points_to_award, user_id))
             conn.commit()
             return jsonify({'message': 'Idea rated successfully', 'points_awarded': points_to_award}), 201 # Indicate creation (first rating)
 
@@ -279,7 +280,7 @@ def get_idea_of_the_day():
 
 @app.route('/api/user/<int:user_id>/points', methods=['GET'])
 def get_user_points_api(user_id):
-    points = get_user_points(user_id) # Use the function defined earlier
+    points = get_user_points(user_id)
     return jsonify({'points': points}), 200
 
 
