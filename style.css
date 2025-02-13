@@ -1,26 +1,33 @@
-/* style.css (Frontend CSS - Basic Styling for New Elements) */
-body {
-    font-family: Arial, sans-serif;
+/* Basic Reset and General Styles */
+body, html {
     margin: 0;
     padding: 0;
+    font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
     color: #333;
 }
 
+.header, .main-content, .footer {
+    width: 90%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
 .header {
-    background-color: #333;
+    background-color: #0056b3;
     color: white;
-    padding: 1em 0;
-    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5em 1em;
 }
 
 .header h1 {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 .user-profile-container {
@@ -31,462 +38,217 @@ body {
 .user-profile-icon {
     width: 30px;
     height: 30px;
+    background-color: #ddd; /* Placeholder */
     border-radius: 50%;
-    background-color: #ddd; /* Placeholder for user icon/avatar */
-    margin-right: 0.5em;
-}
-
-#user-profile-name, #user-points-header {
-    color: white;
-    margin-right: 0.5em;
-}
-
-/* Style for buttons in header */
-.header button {
-    background-color: #555;
-    color: white;
-    border: none;
-    padding: 0.5em 0.75em;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    margin-left: 0.5em;
-}
-
-.header button:hover {
-    background-color: #777;
-}
-
-
-.main-content {
-    padding: 20px;
-    max-width: 960px;
-    margin: 20px auto;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-/* Idea of the Day Section */
-#idea-of-the-day-container {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-#idea-of-the-day-container h2 {
-    margin-top: 0;
-    color: #555;
-}
-
-#featured-idea {
-    padding: 10px;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    background-color: white;
-}
-
-
-/* Sort and Filter */
-#sort-filter-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    gap: 10px;
-}
-
-#sort-filter-container label, #sort-filter-container select, #sort-filter-container input {
     margin-right: 10px;
 }
 
-.filter-bar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
+.user-profile-container span, .user-profile-container button {
+    margin: 0 10px;
+    color: white;
 }
 
-.filter-button {
-    padding: 0.5em 1em;
+.user-profile-container button {
+    background-color: #007bff;
+    color: white;
     border: none;
+    padding: 8px 12px;
     border-radius: 5px;
-    background-color: #e0e0e0;
-    cursor: pointer;
-    color: #333;
-}
-
-.filter-button.active {
-    background-color: #007bff;
-    color: white;
-}
-
-.search-container {
-    display: flex;
-    margin-bottom: 20px;
-}
-
-#search-input {
-    flex-grow: 1;
-    padding: 0.5em;
-    border-radius: 5px 0 0 5px;
-    border: 1px solid #ccc;
-}
-
-#search-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5em 1em;
-    border-radius: 0 5px 5px 0;
     cursor: pointer;
 }
 
-#idea-feed {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-/* Basic Idea Card Styling - needs more detail */
-.idea-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.idea-card h3 {
-    margin-top: 0;
-    margin-bottom: 0.5em;
-    font-size: 1.2em;
-}
-
-.idea-card .idea-category {
-    font-size: 0.9em;
-    color: #777;
-    margin-bottom: 0.5em;
-}
-
-.idea-card .idea-description {
-    font-size: 1em;
-    line-height: 1.4;
-    color: #555;
-}
-
-.idea-card .idea-actions {
-    margin-top: 1em;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    font-size: 0.9em;
-    color: #777;
-}
-
-.idea-card .idea-actions button, .idea-card .idea-actions span {
-    margin: 0 0.5em;
-    cursor: pointer;
-}
-
-.idea-card .idea-actions button:hover {
-    color: #007bff;
-}
-
-
-#load-more-container {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-#load-more-button {
-    padding: 0.75em 1.5em;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    font-size: 1em;
-}
-
-#load-more-button:hover {
+.user-profile-container button:hover {
     background-color: #0056b3;
 }
 
 
-/* Suggest Idea Section */
-#suggest-idea-container {
+.main-content {
+    background-color: white;
     padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+.footer-nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* Idea Card Styles */
+.idea-card {
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #f9f9f9;
-    margin-bottom: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
 }
 
-#suggest-idea-container h2 {
+.idea-card h3 {
     margin-top: 0;
-    color: #555;
+    margin-bottom: 5px;
+    color: #0056b3;
 }
 
-#suggest-idea-form .form-group {
+.idea-card .category {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.idea-card .tags {
+    font-size: 0.85em;
+    color: #555;
+    margin-top: 10px;
+}
+
+.rating-favorite-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.rating-display {
+    color: #ffc107; /* Star color */
+}
+
+.rating-display i {
+    margin-right: 5px;
+}
+
+.favorite-button, .rate-button {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.favorite-button:hover, .rate-button:hover {
+    background-color: #eee;
+}
+
+.favorite-button.favorited {
+    color: red; /* Example favorited style */
+    border-color: red;
+}
+
+
+/* Filter and Sort Styles */
+#sort-filter-container, .filter-bar, .search-container {
+    margin-bottom: 20px;
+    padding: 10px 0;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap; /* Allow filters to wrap on smaller screens */
+}
+
+#sort-filter-container label, #sort-filter-container select,
+.filter-bar button, .search-container input, .search-container button {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.filter-bar button {
+    background-color: #eee;
+    border: none;
+    cursor: pointer;
+}
+
+.filter-bar button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.search-container input {
+    flex-grow: 1; /* Input takes up available space */
+    min-width: 150px;
+}
+
+.search-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Forms and Modals */
+.form-group {
     margin-bottom: 15px;
 }
 
-#suggest-idea-form label {
+.form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-#suggest-idea-form .form-control {
+.form-control {
     width: 100%;
-    padding: 0.75em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-}
-
-#suggest-idea-form textarea.form-control {
-    resize: vertical;
-}
-
-#suggest-idea-form button[type="submit"] {
-    padding: 0.75em 1.5em;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    font-size: 1em;
-}
-
-#suggest-idea-form button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-#suggestion-message-area {
-    margin-top: 10px;
-    color: green;
-    font-weight: bold;
-}
-
-
-/* User Suggestions (Admin View) Section */
-#user-suggestions-container {
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    margin-bottom: 20px;
-}
-
-#user-suggestions-container h2 {
-    margin-top: 0;
-    color: #555;
-}
-
-#suggestions-list {
-    /* Style for suggestion list - needs more detail */
-}
-
-.suggestion-item {
-    border: 1px solid #eee;
     padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    background-color: white;
-}
-
-.suggestion-item h4 {
-    margin-top: 0;
-    margin-bottom: 0.5em;
-    font-size: 1.1em;
-}
-
-.suggestion-item .suggestion-category {
-    font-size: 0.9em;
-    color: #777;
-    margin-bottom: 0.5em;
-}
-
-.suggestion-item .suggestion-text {
-    font-size: 1em;
-    line-height: 1.4;
-    color: #555;
-}
-
-.suggestion-item .suggestion-actions {
-    margin-top: 1em;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.suggestion-item .suggestion-actions button {
-    padding: 0.5em 0.75em;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-}
-
-.suggestion-item .suggestion-actions button.approve {
-    background-color: green;
-    color: white;
-}
-
-.suggestion-item .suggestion-actions button.reject {
-    background-color: red;
-    color: white;
-}
-
-.suggestion-item .suggestion-status {
-    font-size: 0.9em;
-    color: #777;
-}
-
-
-/* User Profile Section */
-#user-profile-section {
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    margin-bottom: 20px;
-}
-
-#user-profile-section h2 {
-    margin-top: 0;
-    color: #555;
-}
-
-#profile-details {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-}
-
-.profile-avatar-container {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid #ddd;
-}
-
-#profile-avatar-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensure image covers container */
-}
-
-#profile-info p {
-    margin-bottom: 0.75em;
-}
-
-#profile-description-textarea {
-    width: 100%;
-    padding: 0.75em;
     border: 1px solid #ccc;
     border-radius: 5px;
-    resize: vertical;
-    font-size: 1em;
+    box-sizing: border-box; /* Important for width: 100% to include padding and border */
 }
 
-#update-profile-button {
-    padding: 0.75em 1.5em;
-    border: none;
-    border-radius: 5px;
+button[type="submit"] {
     background-color: #007bff;
     color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 1em;
-    margin-top: 10px;
 }
 
-#update-profile-button:hover {
+button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-#profile-message-area {
-    margin-top: 10px;
-    color: green;
-    font-weight: bold;
-}
 
-
-/* Auth Modal Overlay */
-#auth-overlay {
+#auth-overlay, #onboarding-overlay {
+    display: none; /* Hidden by default, shown by JS */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-    display: flex;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensure it's on top */
+    z-index: 1000; /* Ensure overlay is on top */
 }
 
-#auth-modal {
+#auth-modal, #onboarding-modal {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 400px; /* Adjust width as needed */
-    max-width: 90%; /* For smaller screens */
-}
-
-#auth-form-container form {
-    padding: 15px;
-}
-
-#auth-form-container h2 {
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     text-align: center;
-    margin-bottom: 1em;
-    color: #555;
-}
-
-#auth-form-container .form-group {
-    margin-bottom: 15px;
-}
-
-#auth-form-container label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-#auth-form-container .form-control {
-    width: 100%;
-    padding: 0.75em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-}
-
-#auth-form-container button[type="submit"] {
-    padding: 0.75em 1.5em;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    font-size: 1em;
-    width: 100%;
-    display: block;
-    margin: 1em auto;
-}
-
-#auth-form-container button[type="submit"]:hover {
-    background-color: #0056b3;
 }
 
 .auth-switch-link {
-    text-align: center;
-    margin-top: 1em;
+    margin-top: 15px;
     font-size: 0.9em;
 }
 
@@ -495,64 +257,44 @@ body {
     text-decoration: none;
 }
 
-.auth-switch-link a:hover {
-    text-decoration: underline;
-}
-
 .error-message {
     color: red;
-    margin-top: 0.5em;
-    font-size: 0.9em;
+    margin-top: 10px;
 }
 
+.notification-area {
+    position: fixed; /* Stay in place */
+    top: 20px; /* Distance from the top */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center correction */
+    z-index: 1001; /* Above overlay if needed */
+}
 
-/* Footer */
-.footer {
-    background-color: #333;
+.notification {
+    background-color: #4CAF50; /* Success green */
     color: white;
-    text-align: center;
-    padding: 1em 0;
-    position: fixed; /* Fixed to bottom */
-    bottom: 0;
-    width: 100%;
-}
-
-.footer-nav {
-    margin-top: 0.5em;
-}
-
-.footer-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 1em;
-    font-size: 0.9em;
-}
-
-.footer-nav a:hover {
-    text-decoration: underline;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    opacity: 0.9;
 }
 
 
-/* Responsive Design (Basic - adjust as needed) */
+/* Responsive Design (Example - adjust breakpoints as needed) */
 @media (max-width: 768px) {
     .header {
         flex-direction: column;
         text-align: center;
     }
     .header h1 {
-        margin-bottom: 0.5em;
+        margin-bottom: 10px;
     }
     .user-profile-container {
         flex-direction: column;
     }
-    .header button {
-        margin: 0.5em 0;
-    }
-    #sort-filter-container {
+
+    #sort-filter-container, .filter-bar, .search-container {
         flex-direction: column;
-        align-items: stretch;
-    }
-    .filter-bar {
-        flex-direction: column;
+        align-items: stretch; /* Full width on small screens */
     }
 }
